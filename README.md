@@ -1,5 +1,4 @@
-java-dogstatsd-client [![Build Status](https://travis-ci.org/arnabk/java-dogstatsd-client.svg?branch=master)]
-==================
+##  **java-dogstatsd-client** ![Build Status](https://travis-ci.org/arnabk/java-dogstatsd-client.svg?branch=master)
 
 A statsd client library implemented in Java.  Allows for Java applications to easily communicate with statsd.
 
