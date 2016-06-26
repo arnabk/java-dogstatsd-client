@@ -241,6 +241,13 @@ public final class NonBlockingStatsDClient implements StatsDClient {
     public void count(String aspect, long delta, String... tags) {
         send(String.format("%s%s:%d|c%s", prefix, aspect, delta, tagString(tags)));
     }
+    
+    public void count(String aspect, long delta, double sampleRate, String...tags) {
+    	if(isInvalidSample(sampleRate)) {
+    		return;
+    	}
+    	send(String.format("%s%s:%d|c|%f%s", prefix, aspect, delta, sampleRate, tagString(tags)));
+    }
 
     /**
      * Increments the specified counter by one.
@@ -256,6 +263,10 @@ public final class NonBlockingStatsDClient implements StatsDClient {
     public void incrementCounter(String aspect, String... tags) {
         count(aspect, 1, tags);
     }
+    
+    public void incrementCounter(String aspect, double sampleRate, String... tags) {
+    	count(aspect, 1, sampleRate, tags);
+    }
 
     /**
      * Convenience method equivalent to {@link #incrementCounter(String, String[])}.
@@ -263,6 +274,10 @@ public final class NonBlockingStatsDClient implements StatsDClient {
     @Override
     public void increment(String aspect, String... tags) {
         incrementCounter(aspect, tags);
+    }
+    
+    public void increment(String aspect, double sampleRate, String...tags ) {
+    	incrementCounter(aspect, sampleRate, tags);
     }
 
     /**
@@ -279,6 +294,12 @@ public final class NonBlockingStatsDClient implements StatsDClient {
     public void decrementCounter(String aspect, String... tags) {
         count(aspect, -1, tags);
     }
+    
+    
+    public void decrementCounter(String aspect, double sampleRate, String... tags) {
+        count(aspect, -1, sampleRate, tags);
+    }
+     
 
     /**
      * Convenience method equivalent to {@link #decrementCounter(String, String[])}.
@@ -288,6 +309,10 @@ public final class NonBlockingStatsDClient implements StatsDClient {
         decrementCounter(aspect, tags);
     }
 
+    public void decrement(String aspect, double sampleRate, String... tags) {
+        decrementCounter(aspect, sampleRate, tags);
+    }
+    
     /**
      * Records the latest fixed value for the specified named gauge.
      *
@@ -304,6 +329,14 @@ public final class NonBlockingStatsDClient implements StatsDClient {
     public void recordGaugeValue(String aspect, double value, String... tags) {
         send(String.format("%s%s:%f|g%s", prefix, aspect, Precision.round(value, 6), tagString(tags)));
     }
+    
+
+    public void recordGaugeValue(String aspect, double value, double sampleRate, String... tags) {
+    	if(isInvalidSample(sampleRate)) {
+    		return;
+    	}
+        send(String.format("%s%s:%f|g|%f%s", prefix, aspect, Precision.round(value, 6), sampleRate, tagString(tags)));
+    }
 
     /**
      * Convenience method equivalent to {@link #recordGaugeValue(String, double, String[])}.
@@ -311,6 +344,10 @@ public final class NonBlockingStatsDClient implements StatsDClient {
     @Override
     public void gauge(String aspect, double value, String... tags) {
         recordGaugeValue(aspect, value, tags);
+    }
+    
+    public void gauge(String aspect, double value, double sampleRate, String... tags) {
+        recordGaugeValue(aspect, value, sampleRate, tags);
     }
 
 
@@ -330,6 +367,13 @@ public final class NonBlockingStatsDClient implements StatsDClient {
     public void recordGaugeValue(String aspect, long value, String... tags) {
         send(String.format("%s%s:%d|g%s", prefix, aspect, value, tagString(tags)));
     }
+    
+    public void recordGaugeValue(String aspect, long value, double sampleRate, String... tags) {
+    	if(isInvalidSample(sampleRate)) {
+    		return;
+    	}
+        send(String.format("%s%s:%d|g|%f%s", prefix, aspect, value, sampleRate, tagString(tags)));
+    }
 
     /**
      * Convenience method equivalent to {@link #recordGaugeValue(String, long, String[])}.
@@ -337,6 +381,10 @@ public final class NonBlockingStatsDClient implements StatsDClient {
     @Override
     public void gauge(String aspect, long value, String... tags) {
         recordGaugeValue(aspect, value, tags);
+    }
+    
+    public void gauge(String aspect, long value, double sampleRate, String... tags) {
+        recordGaugeValue(aspect, value, sampleRate, tags);
     }
 
     /**
@@ -355,6 +403,13 @@ public final class NonBlockingStatsDClient implements StatsDClient {
     public void recordExecutionTime(String aspect, long timeInMs, String... tags) {
         send(String.format("%s%s:%d|ms%s", prefix, aspect, timeInMs, tagString(tags)));
     }
+    
+    public void recordExecutionTime(String aspect, long timeInMs, double sampleRate, String... tags) {
+    	if(isInvalidSample(sampleRate)) {
+    		return;
+    	}
+        send(String.format("%s%s:%d|ms|%f%s", prefix, aspect, timeInMs, sampleRate, tagString(tags)));
+    }
 
     /**
      * Convenience method equivalent to {@link #recordExecutionTime(String, long, String[])}.
@@ -362,6 +417,10 @@ public final class NonBlockingStatsDClient implements StatsDClient {
     @Override
     public void time(String aspect, long value, String... tags) {
         recordExecutionTime(aspect, value, tags);
+    }
+    
+    public void time(String aspect, long value, double sampleRate, String... tags) {
+        recordExecutionTime(aspect, value, sampleRate, tags);
     }
 
     /**
@@ -380,6 +439,13 @@ public final class NonBlockingStatsDClient implements StatsDClient {
     public void recordHistogramValue(String aspect, double value, String... tags) {
         send(String.format("%s%s:%f|h%s", prefix, aspect, Precision.round(value, 6), tagString(tags)));
     }
+    
+    public void recordHistogramValue(String aspect, double value, double sampleRate, String... tags) {
+    	if(isInvalidSample(sampleRate)) {
+    		return;
+    	}
+        send(String.format("%s%s:%f|h|%f%s", prefix, aspect, Precision.round(value, 6), sampleRate, tagString(tags)));
+    }
 
     /**
      * Convenience method equivalent to {@link #recordHistogramValue(String, double, String[])}.
@@ -387,6 +453,10 @@ public final class NonBlockingStatsDClient implements StatsDClient {
     @Override
     public void histogram(String aspect, double value, String... tags) {
         recordHistogramValue(aspect, value, tags);
+    }
+    
+    public void histogram(String aspect, double value, double sampleRate, String... tags) {
+        recordHistogramValue(aspect, value, sampleRate, tags);
     }
 
     /**
@@ -405,6 +475,13 @@ public final class NonBlockingStatsDClient implements StatsDClient {
     public void recordHistogramValue(String aspect, long value, String... tags) {
         send(String.format("%s%s:%d|h%s", prefix, aspect, value, tagString(tags)));
     }
+    
+    public void recordHistogramValue(String aspect, long value, double sampleRate, String... tags) {
+    	if(isInvalidSample(sampleRate)) {
+    		return;
+    	}
+        send(String.format("%s%s:%d|h|%f%s", prefix, aspect, value, sampleRate, tagString(tags)));
+    }
 
     /**
      * Convenience method equivalent to {@link #recordHistogramValue(String, long, String[])}.
@@ -413,9 +490,17 @@ public final class NonBlockingStatsDClient implements StatsDClient {
     public void histogram(String aspect, long value, String... tags) {
         recordHistogramValue(aspect, value, tags);
     }
+    
+    public void histogram(String aspect, long value, double sampleRate, String... tags) {
+        recordHistogramValue(aspect, value, sampleRate, tags);
+    }
 
     private void send(String message) {
         queue.offer(message);
+    }
+    
+    private boolean isInvalidSample(double sampleRate) {
+    	return sampleRate != 1 && Math.random() > sampleRate;
     }
 
     private class QueueConsumer implements Runnable {
@@ -443,6 +528,8 @@ public final class NonBlockingStatsDClient implements StatsDClient {
                 }
             }
         }
+        
+        
 
         private void blockingSend() throws IOException {
             int sizeOfBuffer = sendBuffer.position();
