@@ -6,7 +6,7 @@
 	<artifactId>java-dogstatsd-client</artifactId>
 	<packaging>jar</packaging>
 	<name>java-dogstatsd-client</name>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<description>A tiny library allowing Java applications to communicate with DataDog statsd instances easily.</description>
 	<url>https://github.com/arnabk/java-dogstatsd-client</url>
 
@@ -119,7 +119,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<skip>true</skip>
+					<additionalparam>-Xdoclint:none</additionalparam>
 				</configuration>
 			</plugin>
 			<plugin>
