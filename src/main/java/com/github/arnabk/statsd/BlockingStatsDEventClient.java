@@ -249,9 +249,6 @@ public class BlockingStatsDEventClient  {
     	if (dateHappened > 0) {
     		sb.append(String.format("|d:%d", dateHappened));
     	}
-    	if (hostname != null) {
-    		sb.append(String.format("|h:%s", hostname));
-    	}
     	if (aggregationKey != null) {
     		sb.append(String.format("|k:%s", aggregationKey));
     	}
