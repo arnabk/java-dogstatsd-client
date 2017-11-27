@@ -15,7 +15,7 @@ before_install:
   -d
 - cp local.secring.gpg ~/.gnupg/secring.gpg
 - cp local.pubring.gpg ~/.gnupg/pubring.gpg
-script: mvn clean deploy --settings maven_settings.xml
+script: mvn --settings maven_settings.xml clean deploy
 env:
   global:
   - secure: fxrZmRXlK5WrcD/zdUNB9mDuBdqEY2jIGH6lE/PepF1fUSJ1wJjfYnGhgyK8GIgTY3017gr6pu+ouKnryc+dUviEGkLHj9pPOCuMOMtmaOm/9wRZzpsyJnxgynUTZTvIqnk/lKxis2flSIu68pl/R5jjx7TidejnMDeRrF7vfLk=
