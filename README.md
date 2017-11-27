@@ -12,7 +12,7 @@ The client jar is distributed via maven central
 <dependency>
     <groupId>com.github.arnabk</groupId>
     <artifactId>java-dogstatsd-client</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
 </dependency>
 ```
 
