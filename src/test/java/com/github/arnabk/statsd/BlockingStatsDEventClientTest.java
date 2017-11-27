@@ -34,7 +34,7 @@ public class BlockingStatsDEventClientTest {
         client.event("title", "message");
         server.waitForMessage();
 
-        assertThat(server.messagesReceived(), contains("_e{5,7}:title|message|h:localhost"));
+        assertThat(server.messagesReceived(), contains("_e{5,7}:title|message"));
     }
 
     @Test public void
@@ -44,7 +44,7 @@ public class BlockingStatsDEventClientTest {
         client.event("title", "message", 1);
         server.waitForMessage();
 
-        assertThat(server.messagesReceived(), contains("_e{5,7}:title|message|d:1|h:localhost"));
+        assertThat(server.messagesReceived(), contains("_e{5,7}:title|message|d:1"));
     }
 
     @Test public void
@@ -54,7 +54,7 @@ public class BlockingStatsDEventClientTest {
         client.event("title", "message", AlertType.warning);
         server.waitForMessage();
 
-        assertThat(server.messagesReceived(), contains("_e{5,7}:title|message|h:localhost|t:warning"));
+        assertThat(server.messagesReceived(), contains("_e{5,7}:title|message|t:warning"));
     }
 
     @Test public void
@@ -64,7 +64,7 @@ public class BlockingStatsDEventClientTest {
         client.event("title", "message", Priority.normal);
         server.waitForMessage();
 
-        assertThat(server.messagesReceived(), contains("_e{5,7}:title|message|h:localhost|p:normal"));
+        assertThat(server.messagesReceived(), contains("_e{5,7}:title|message|p:normal"));
     }
 
     @Test public void
@@ -74,7 +74,7 @@ public class BlockingStatsDEventClientTest {
         client.event("title", "message", new String[] {"tag1:tag1", "tag2:tag2"});
         server.waitForMessage();
 
-        assertThat(server.messagesReceived(), contains("_e{5,7}:title|message|h:localhost|#tag2:tag2,tag1:tag1"));
+        assertThat(server.messagesReceived(), contains("_e{5,7}:title|message|#tag2:tag2,tag1:tag1"));
     }
 
     @Test public void
@@ -84,7 +84,7 @@ public class BlockingStatsDEventClientTest {
         client.event("title", "message", 1, "testAggregationKey", Priority.normal, "sourceTypeName", AlertType.error, new String[] {"tag1:tag1", "tag2:tag2"});
         server.waitForMessage();
 
-        assertThat(server.messagesReceived(), contains("_e{5,7}:title|message|d:1|h:localhost|k:testAggregationKey|p:normal|s:sourceTypeName|t:error|#tag2:tag2,tag1:tag1"));
+        assertThat(server.messagesReceived(), contains("_e{5,7}:title|message|d:1|k:testAggregationKey|p:normal|s:sourceTypeName|t:error|#tag2:tag2,tag1:tag1"));
     }
 
 }
