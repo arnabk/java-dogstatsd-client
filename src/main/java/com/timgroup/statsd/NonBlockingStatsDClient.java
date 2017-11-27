@@ -246,7 +246,7 @@ public final class NonBlockingStatsDClient implements StatsDClient {
     	if(isInvalidSample(sampleRate)) {
     		return;
     	}
-    	send(String.format("%s%s:%d|c|%f%s", prefix, aspect, delta, sampleRate, tagString(tags)));
+    	send(String.format("%s%s:%d|c|@%f%s", prefix, aspect, delta, sampleRate, tagString(tags)));
     }
 
     /**
@@ -335,7 +335,7 @@ public final class NonBlockingStatsDClient implements StatsDClient {
     	if(isInvalidSample(sampleRate)) {
     		return;
     	}
-        send(String.format("%s%s:%f|g|%f%s", prefix, aspect, Precision.round(value, 6), sampleRate, tagString(tags)));
+        send(String.format("%s%s:%f|g|@%f%s", prefix, aspect, Precision.round(value, 6), sampleRate, tagString(tags)));
     }
 
     /**
@@ -372,7 +372,7 @@ public final class NonBlockingStatsDClient implements StatsDClient {
     	if(isInvalidSample(sampleRate)) {
     		return;
     	}
-        send(String.format("%s%s:%d|g|%f%s", prefix, aspect, value, sampleRate, tagString(tags)));
+        send(String.format("%s%s:%d|g|@%f%s", prefix, aspect, value, sampleRate, tagString(tags)));
     }
 
     /**
@@ -408,7 +408,7 @@ public final class NonBlockingStatsDClient implements StatsDClient {
     	if(isInvalidSample(sampleRate)) {
     		return;
     	}
-        send(String.format("%s%s:%d|ms|%f%s", prefix, aspect, timeInMs, sampleRate, tagString(tags)));
+        send(String.format("%s%s:%d|ms|@%f%s", prefix, aspect, timeInMs, sampleRate, tagString(tags)));
     }
 
     /**
@@ -444,7 +444,7 @@ public final class NonBlockingStatsDClient implements StatsDClient {
     	if(isInvalidSample(sampleRate)) {
     		return;
     	}
-        send(String.format("%s%s:%f|h|%f%s", prefix, aspect, Precision.round(value, 6), sampleRate, tagString(tags)));
+        send(String.format("%s%s:%f|h|@%f%s", prefix, aspect, Precision.round(value, 6), sampleRate, tagString(tags)));
     }
 
     /**
@@ -480,7 +480,7 @@ public final class NonBlockingStatsDClient implements StatsDClient {
     	if(isInvalidSample(sampleRate)) {
     		return;
     	}
-        send(String.format("%s%s:%d|h|%f%s", prefix, aspect, value, sampleRate, tagString(tags)));
+        send(String.format("%s%s:%d|h|@%f%s", prefix, aspect, value, sampleRate, tagString(tags)));
     }
 
     /**
